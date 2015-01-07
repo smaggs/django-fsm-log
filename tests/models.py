@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django_fsm_log.decorators import fsm_log_by
+from django_fsm_log.decorators import fsm_log_by, fsm_log_reason
 
 try:
     from django_fsm import FSMField, transition
@@ -20,8 +20,9 @@ class Article(models.Model):
     state = FSMField(default='draft', protected=True)
 
     @fsm_log_by
+    @fsm_log_reason
     @transition(field=state, source='draft', target='submitted')
-    def submit(self, by=None):
+    def submit(self, by=None, reason=None):
         pass
 
     @fsm_log_by

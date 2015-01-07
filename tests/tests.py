@@ -81,6 +81,18 @@ class StateLogModelTests(TestCase):
         log = StateLog.objects.all()[0]
         self.assertEqual(log.content_object, self.article)
 
+    def test_reason_is_set_when_passed_into_transition(self):
+        self.article.submit(reason='Some reason')
+
+        log = StateLog.objects.all()[0]
+        self.assertEqual('Some reason', log.reason)
+
+    def test_reason_is_none_when_not_set_in_transition(self):
+        self.article.submit()
+
+        log = StateLog.objects.all()[0]
+        self.assertIsNone(log.reason)
+
 
 class StateLogManagerTests(TestCase):
     def setUp(self):

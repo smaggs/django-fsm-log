@@ -29,6 +29,7 @@ class CachedBackend(object):
         from .models import StateLog
         StateLog.pending_objects.create(
             by=getattr(instance, 'by', None),
+            reason=getattr(instance, 'reason', None),
             state=target,
             transition=name,
             content_object=instance,
@@ -55,6 +56,7 @@ class SimpleBackend(object):
         from .models import StateLog
         log = StateLog.objects.create(
             by=getattr(instance, 'by', None),
+            reason=getattr(instance, 'reason', None),
             state=target,
             transition=name,
             content_object=instance,
