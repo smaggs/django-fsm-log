@@ -12,13 +12,13 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
 
-        # Changing field 'StateLog.timestamp'
-        db.alter_column(u'django_fsm_log_statelog', 'timestamp', self.gf('django.db.models.fields.DateTimeField')())
+        # Changing field 'StateLog.reason'
+        db.alter_column(u'django_fsm_log_statelog', 'reason', self.gf('django.db.models.fields.CharField')(max_length=1024, null=True))
 
     def backwards(self, orm):
 
-        # Changing field 'StateLog.timestamp'
-        db.alter_column(u'django_fsm_log_statelog', 'timestamp', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True))
+        # Changing field 'StateLog.reason'
+        db.alter_column(u'django_fsm_log_statelog', 'reason', self.gf('django.db.models.fields.CharField')(max_length=255, null=True))
 
     models = {
         "%s.%s" % (User._meta.app_label, User._meta.module_name): {
@@ -37,6 +37,7 @@ class Migration(SchemaMigration):
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'object_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'reason': ('django.db.models.fields.CharField', [], {'max_length': '1024', 'null': 'True', 'blank': 'True'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_index': 'True'}),
             'timestamp': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'transition': ('django.db.models.fields.CharField', [], {'max_length': '255'})
