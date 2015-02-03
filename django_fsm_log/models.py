@@ -17,7 +17,7 @@ class StateLog(models.Model):
     by = models.ForeignKey(getattr(settings, 'AUTH_USER_MODEL', 'auth.User'), blank=True, null=True)
     state = models.CharField(max_length=255, db_index=True)
     transition = models.CharField(max_length=255)
-    reason = models.CharField(max_length=255, blank=True, null=True)
+    reason = models.CharField(max_length=1024, blank=True, null=True)
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField(db_index=True)
